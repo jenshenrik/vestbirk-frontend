@@ -16,6 +16,16 @@ jobs:
                 command: |
                     make build
 
+    build-prod:
+        <<: *default
+        steps:
+            - setup_remote_docker
+            - checkout
+            - run:
+                name: Build production image
+                command: |
+                    make build-prod
+
     test:
         <<: *default
         steps:
@@ -26,6 +36,7 @@ jobs:
                 command: |
                     make test
 
+
 workflows:
     version: 2
     build_and_test:
@@ -35,3 +46,6 @@ workflows:
                 requires:
                     - build
 
+    production:
+        jobs:
+            -build-prod
