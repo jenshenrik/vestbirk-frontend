@@ -36,7 +36,6 @@ jobs:
                 command: |
                     make test
 
-
 workflows:
     version: 2
     build_and_test:
@@ -51,4 +50,4 @@ workflows:
             - build-prod
             - test:
                 requires:
-                    - build
+                    - build-prod
