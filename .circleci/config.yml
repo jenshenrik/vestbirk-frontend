@@ -48,4 +48,7 @@ workflows:
 
     production:
         jobs:
-            -build-prod
+            - build-prod
+            - test:
+                requires:
+                    - build
