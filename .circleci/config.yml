@@ -66,10 +66,6 @@ workflows:
     production:
         jobs:
             - build-prod
-                filters:
-                    branches:
-                        only: 
-                            - master
             - test:
                 requires:
                     - build-prod
