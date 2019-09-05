@@ -1,0 +1,17 @@
+setup: &default
+    docker:
+        - image: circleci/node:12.2.0
+    working_directory: ~/repo
+
+version: 2
+
+jobs:
+    build:
+        <<: *default
+        steps:
+            - setup_remote_docker
+            - checkout
+            - run:
+                name: Build
+                command: |
+                    make build
