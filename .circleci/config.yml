@@ -68,7 +68,8 @@ workflows:
             - build-prod
                 filters:
                     branches:
-                        only: master
+                        only: 
+                            - master
             - test:
                 requires:
                     - build-prod
