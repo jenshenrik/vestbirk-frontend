@@ -3,6 +3,12 @@ setup: &default
         - image: circleci/node:12.2.0
     working_directory: ~/repo
 
+master_only: &master-only
+    filters:
+        branches:
+            only:
+                - master
+
 version: 2
 
 jobs:
@@ -66,15 +72,12 @@ workflows:
     production:
         jobs:
             - build-prod
+                <<: *master-only
             - test:
                 requires:
                     - build-prod
-                filters:
-                    branches:
-                        only: master
+                <<: *master-only
             - push_image:
                 requires:
                     - test
-                filters:
-                    branches:
-                        only: master
+                <<: *master-only
