@@ -26,6 +26,21 @@ jobs:
                 command: |
                     make build-prod
 
+    push_image:
+        <<: *default
+        steps:
+            - setup_remote_docker
+            - checkout
+            - run:
+                Name: Login to Canister
+                command: |
+                    docker login --username $DOCKER_USER --password $DOCKER_PASSWORD cloud.canister.io:5000
+            - run:
+                Name: Build and push image
+                command: |
+                    make build-prod
+                    docker push cloud.canister.io:5000/jenshenrik/vestbirk-frontend
+
     test:
         <<: *default
         steps:
@@ -54,6 +69,9 @@ workflows:
             - test:
                 requires:
                     - build-prod
+            - push_image:
+                requires:
+                    - test
                 filters:
                     branches:
                         only: master
