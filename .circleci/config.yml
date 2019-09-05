@@ -41,13 +41,25 @@ workflows:
     build_and_test:
         jobs:
             - build
+                filters:
+                    branches:
+                        ignore: master
             - test:
                 requires:
                     - build
+                filters:
+                    branches:
+                        ignore: master
 
     production:
         jobs:
             - build-prod
+                filters:
+                    branches:
+                        only: master
             - test:
                 requires:
                     - build-prod
+                filters:
+                    branches:
+                        only: master
