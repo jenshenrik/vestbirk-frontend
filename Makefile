@@ -8,3 +8,8 @@ start-local: build
 
 stop:
 	docker stop vestbirk-frontend
+
+test: start-local
+	docker exec -it vestbirk-frontend ng test --watch=false
+	docker exec -it vestbirk-frontend ng e2e --port 4202
+
