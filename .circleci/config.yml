@@ -71,7 +71,7 @@ workflows:
 
     production:
         jobs:
-            - build-prod
+            - build-prod:
                 <<: *master-only
             - test:
                 requires:
