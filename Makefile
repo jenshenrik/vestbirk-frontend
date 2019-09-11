@@ -5,7 +5,10 @@ build:
 
 build-prod:
 	docker build -f Dockerfile-prod -t vestbirk-frontend:prod .
-    docker tag vestbirk-frontend cloud.canister.io:5000/jenshenrik/vestbirk-frontend
+	docker tag vestbirk-frontend cloud.canister.io:5000/jenshenrik/vestbirk-frontend
+
+run-prod: build-prod
+	docker run -it -p 80:80 --rm vestbirk-frontend:prod
 
 start-local: build
 	docker run -d -v ${PWD}:/vestbirk/app -v /app/node_modules -p 4201:4200 --name vestbirk-frontend --rm vestbirk-frontend:dev
