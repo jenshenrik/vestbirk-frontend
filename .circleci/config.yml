@@ -32,6 +32,16 @@ jobs:
                 command: |
                     make build-prod
 
+    test:
+        <<: *default
+        steps:
+            - setup_remote_docker
+            - checkout
+            - run:
+                name: Build and Test
+                command: |
+                    make test
+
     push_image:
         <<: *default
         steps:
@@ -47,15 +57,18 @@ jobs:
                     make build-prod
                     docker push cloud.canister.io:5000/jenshenrik/vestbirk-frontend
 
-    test:
-        <<: *default
+    deploy:
+        machine:
+            enabled: true
         steps:
-            - setup_remote_docker
-            - checkout
+            - add_ssh_keys:
+                fingerprints:
+                    - "52:f3:eb:62:6b:f6:15:23:87:0a:1d:61:d6:b4:54:d8"
             - run:
-                name: Build and Test
+                name: Deploy over SSH
                 command: |
-                    make test
+                    ssh $SSH_USER@$SSH_HOST "./deploy-vestbirk-frontend.sh"
+
 
 workflows:
     version: 2
