@@ -55,7 +55,7 @@ jobs:
                 Name: Build and push image
                 command: |
                     make build-prod
-                    docker push cloud.canister.io:5000/jenshenrik/vestbirk-frontend
+                    docker push cloud.canister.io:5000/jenshenrik/vestbirk-frontend:prod
 
     deploy:
         machine:
@@ -74,7 +74,10 @@ workflows:
     version: 2
     build_and_test:
         jobs:
-            - build
+            - build:
+                filters:
+                    branches:
+                        ignore: master
             - test:
                 requires:
                     - build
@@ -94,3 +97,8 @@ workflows:
                 requires:
                     - test
                 <<: *master-only
+            - deploy:
+                requires:
+                    - push_image
+                <<: *master-only
+
