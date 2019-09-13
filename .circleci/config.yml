@@ -32,15 +32,15 @@ jobs:
                 command: |
                     make build-prod
 
-    test:
-        <<: *default
-        steps:
-            - setup_remote_docker
-            - checkout
-            - run:
-                name: Build and Test
-                command: |
-                    make test
+                    #    test:
+                    #        <<: *default
+                    #        steps:
+                    #            - setup_remote_docker
+                    #            - checkout
+                    #            - run:
+                    #                name: Build and Test
+                    #                command: |
+                    #                    make test
 
     push_image:
         <<: *default
