@@ -1,0 +1,22 @@
+<header>
+<app-carousel></app-carousel>
+</header>
+<h1>Velkommen til Vestbirk</h1>
+<div class="row">
+  <div class="col-lg-4 col-sm-6 portfolio-item" *ngFor="let guild of guilds">
+    <div class="card h-100">
+      <a href="{{ guild.url }}">
+        <img src="http://placehold.it/700x400" class="card-img-top" />
+      </a>
+      <a href="{{ guild.url }}">
+        <h4 class="card-header">{{ guild.name }}</h4>
+      </a>
+      <div class="card-body">
+        <p class="card-text">{{ guild.shortText }}</p>
+      </div>
+<!--      <div class="card-footer">
+        <a href="{{ guild.url }}" class="btn btn-primary">Læs mere</a>
+</div> -->
+    </div>
+  </div>
+</div>
