@@ -1,6 +1,6 @@
 export class Guild {
   id: number;
   name: string;
-  shortText: string;
+  short_text: string;
   content: string;
 }

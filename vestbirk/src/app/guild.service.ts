@@ -27,7 +27,7 @@ export class GuildService {
   getGuilds(): Observable<Guild[]> {
         return this.http.get<Guild[]>(this.guildsUrl)
           .pipe(
-            tap(_ => this.log('fetched guilds')),
+            tap(g => this.log('fetched guilds', g)),
             catchError(this.handleError<Guild[]>('getGuilds', []))
           );
   }

@@ -15,9 +15,11 @@ export class GuildsComponent implements OnInit {
 
   ngOnInit() {
     this.getGuilds();
+    console.log("guilds", this.guilds);
   }
 
   getGuilds(): void {
+    console.log('subscribing to guilds observable...');
     this.guildService.getGuilds()
       .subscribe(guilds => this.guilds = guilds);
   }
